@@ -11,7 +11,7 @@ MiniZinc and Answer Set Programming solvers for IcoSoKu and its NP-complete gene
 * the *capacity* of each vertex, a non-negative integer (the disposition of the yellow pegs);
 * the *tiles*, made of three non-negative integer weights (the tiles with their dots).
 
-To stay true to IcoSoKu, we impose the number of tiles to be equal to the number of faces. 3coSoKu is NP-complete, but the NP-completeness if we impose the playing field to be a deltahedron is an open problem, you can read all the details in this paper (link to be soon added) that my professor and I wrote.
+To stay true to IcoSoKu, we impose the number of tiles to be equal to the number of faces. 3coSoKu is NP-complete, but the NP-completeness if we impose the playing field to be a deltahedron is an open problem, you can read all the details in [this paper](http://ceur-ws.org/Vol-2710/paper1.pdf) that Agostino Dovier, my professor at the University of Udine, and I wrote.
 
 ## Getting started
 Install [MiniZinc](https://www.minizinc.org/) and/or [clingo](https://potassco.org/), then download this repository.
@@ -38,7 +38,7 @@ clingo 3coSoKu.lp variants/ico.lp input-ico.lp
 for ASP.
 
 ## Experimental results
-Folder `tests` contains the Bash scripts to perform two interesting tests, also described in the paper (link to be soon added):
+Folder `tests` contains the Bash scripts to perform two interesting tests, also described in the [paper](http://ceur-ws.org/Vol-2710/paper1.pdf):
 1. `run_tests.sh` measures the performance of various solvers on a batch on 100 instances of IcoSoKu; on my machine, an Intel i5-7400 @ 3.20 GHz, it generates the times seen below;
 ![Performance of our solvers on 100 instances of IcoSoKu](./images/times.png)
 in the context of the MiniZinc model, the comparison between Gecode's standard search and Gecode's randomized search highlights an interesting aspect of IcoSoKu, that is the presence of many solutions (billions!) to each instance and this might imply a randomized search with *frequent* restarts to be effective in solving IcoSoKu by hand;

@@ -1,9 +1,7 @@
 /*
  * Initialization and handling of the clingo emscripten module (named Clingo) to
- * solve instances of IcoSoku; the only global thing this code sets is function
- * solve()
+ * solve instances of IcoSoku
  */
-{
 let Clingo = {};
 let output = "";
 
@@ -32,7 +30,6 @@ function solve( input_cap ) {
 	return output;
 };
 
-// local function 
 let generateInput = function ( input_cap ) {
 	let input = aspmodel;
 	// Capacities
@@ -77,4 +74,3 @@ weight(1,  0, 0;  1,  1, 0;  1,  2, 0; 2,  0, 0;  2,  1, 0;  2,  2, 1; 3,  0, 0;
 %#show put/9.
 #show assign/2.
 #show rotate/2.`;
-}

@@ -53,16 +53,15 @@ in the context of the MiniZinc model, the comparison between Gecode's standard s
 We developed a 3D application visualising IcoSoKu instances and its solutions using [`three.js`](https://github.com/mrdoob/three.js/), [`Tweakpane`](https://github.com/cocopon/tweakpane), and [`stats.js`](https://github.com/mrdoob/stats.js/). Moreover, the application uses [`clingo-wasm`](https://github.com/domoritz/clingo-wasm) to actually solve (in-browser!) the IcoSoKu instance specified by the user, thanks to clingo compiled to WebAssembly and our ASP encoding.
 
 You can [try here](https://nrizzo.github.io/3coSoKu/) the web application using any modern browser, or you can launch it locally in two ways:
-	- you can host the folder `webapp/http` on your local network with any HTTP server;
-```
-cd webapp/http
-python3 -m http.server &
-firefox localhost:8000
-```
-	- you can run the offline version of the application found in `webapp/offline` without doing any hosting.
-```
-firefox webapp/offlined/index.html
-```
+* you can host the folder `webapp/http` on your local network with any HTTP server;
+
+        cd webapp/http
+        python3 -m http.server &
+        firefox localhost:8000
+
+* you can run the offline version of the application found in `webapp/offline` without doing any hosting.
+
+        firefox webapp/offline/index.html
 
 The offline version in `webapp/offline` does not trigger the browser's CORS rules and it was obtained with some tricks, among which compiling clingo to JavaScript instead of WebAssembly using `empscripten`'s options `-s WASM=0 --memory-init-file 0` (resulting in poorer clingo performance).
 

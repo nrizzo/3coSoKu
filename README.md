@@ -65,5 +65,8 @@ You can [try here](https://nrizzo.github.io/3coSoKu/) the web application using 
 
 The offline version in `webapp/offline` does not trigger the browser's CORS rules and it was obtained with some tricks, among which compiling clingo to JavaScript instead of WebAssembly using `empscripten`'s options `-s WASM=0 --memory-init-file 0` (resulting in poorer clingo performance).
 
+## License
+All of my code (the solver, the scripts and the webapp) is licensed under the terms of the GNU GPL v3 license, whereas the software and assets I am using (located in `webapp/{http,offline}/vendor` and in `webapp/{http,offline}/assets`), that is [Clingo WebAssembly](https://github.com/domoritz/clingo-wasm), [three.js](https://github.com/mrdoob/three.js/), [Tweakpane](https://github.com/cocopon/tweakpane), and [stats.js](https://github.com/mrdoob/stats.js), keep their original license. My images (in the `images` folder) are instead licensed under CC BY.
+
 ## Acknowledgments
 Many thanks to my professor Agostino Dovier for the proposal of this problem and for writing the paper with me, to Marzio De Biasi for his kind words, to the organizers of [CILC 2020](https://cilc2020.demacs.unical.it/), to their reviewers and to its attendees.

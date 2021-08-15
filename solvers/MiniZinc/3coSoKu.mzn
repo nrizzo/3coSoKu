@@ -18,12 +18,12 @@ array[1..n, 0..2] of int: weight; % description of the tiles (clockwise)
 
 % The solution is given by tile and rot
 array[FACE] of var 1..n: tile; % mapping of each face to a tile
-array[FACE] of var 0..2: rot; % rotation of the tile placed on each face
+array[1..n] of var 0..2: rot; % rotation of the each tile
 
 % vertex_sum(v) is the sum of the weights placed near v
 function var int: vertex_sum(VERTEX: v) =
   sum (f in FACE, r in 0..2 where vrtx[f, r] == v)
-      (weight[tile[f], [1,2,0,1,2][3 + r - rot[f]]]); % equiv (3+r-rot[f]) % 3
+      (weight[tile[f], [1,2,0,1,2][3 + r - rot[tile[f]]]]); % equiv (3+r-rot[tile[f]]) % 3
 
 constraint alldifferent(tile);
 constraint forall (v in VERTEX) (vertex_sum(v) == cap[v]);
@@ -31,7 +31,7 @@ constraint forall (v in VERTEX) (vertex_sum(v) == cap[v]);
 % Simmetry breaking: uniform tiles should not be rotated
 constraint forall (t in 1..n)
   (if weight[t, 0] == weight[t, 1] /\ weight[t, 1] == weight[t, 2]
-   then forall (f in FACE where tile[f] == t) (rot[f] == 0)
+   then forall (f in FACE where tile[f] == t) (rot[tile[f]] == 0)
    endif);
 
 % Simmetry breaking: equivalent tiles should conserve their order when mapped
@@ -51,9 +51,9 @@ solve satisfy;
 
 % The instruction to the solution for IcoSoKu
 function string: instruction(FACE: f) =
-  let { 0..3: w0 = weight[fix(tile[f]), (3 - fix(rot[f])) mod 3],
-        0..3: w1 = weight[fix(tile[f]), (4 - fix(rot[f])) mod 3],
-        0..3: w2 = weight[fix(tile[f]), (2 - fix(rot[f])) mod 3],
+  let { 0..3: w0 = weight[fix(tile[f]), (3 - fix(rot[tile[f]])) mod 3],
+        0..3: w1 = weight[fix(tile[f]), (4 - fix(rot[tile[f]])) mod 3],
+        0..3: w2 = weight[fix(tile[f]), (2 - fix(rot[tile[f]])) mod 3],
         VERTEX: v0 = vrtx[f, 0],
         VERTEX: v1 = vrtx[f, 1],
         VERTEX: v2 = vrtx[f, 2],

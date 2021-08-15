@@ -30,7 +30,7 @@ input_weight[3]  = [0,0,3]; input_weight[4]  = [0,1,1]; input_weight[5]  = [0,1,
 input_weight[6]  = [0,1,2]; input_weight[7]  = [0,1,2]; input_weight[8]  = [0,2,1];
 input_weight[9]  = [0,2,1]; input_weight[10] = [0,2,1]; input_weight[11] = [0,2,2];
 input_weight[12] = [0,3,3]; input_weight[13] = [1,1,1]; input_weight[14] = [1,2,3];
-input_weight[15] = [1,2,3]; input_weight[16] = [3,2,1]; input_weight[17] = [3,2,1];
+input_weight[15] = [1,2,3]; input_weight[16] = [1,3,2]; input_weight[17] = [1,3,2];
 input_weight[18] = [2,2,2]; input_weight[19] = [3,3,3];
 
 const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // alphabet for the naming of the vertices
@@ -484,7 +484,7 @@ function processoutput( ttile, rrot ) {
  * face according to the ASP model */
 const clingofaces = {
 	"abc": 1,  "acd": 2,  "ade": 3,  "aef": 4,  "afb": 5,  "bfk": 6,
-	"bkg": 7,  "bgc": 8,  "cgh": 9,  "chd": 10, "die": 11, "dhi": 12,
+	"bgc": 8,  "bkg": 7,  "cgh": 9,  "chd": 10, "dhi": 12, "die": 11,
 	"eij": 13, "ejf": 14, "fjk": 15, "gkl": 16, "glh": 17, "hli": 18,
 	"ilj": 19, "jlk": 20,
 };

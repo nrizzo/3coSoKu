@@ -1,5 +1,6 @@
 %
-% MiniZinc encoding of 3coSoKu ~ Nicola Rizzo and Agostino Dovier
+% MiniZinc encoding of 3coSoKu
+% ~ Nicola Rizzo and Agostino Dovier
 %
 
 include "alldifferent.mzn";
@@ -23,7 +24,8 @@ array[1..n] of var 0..2: rot; % rotation of the each tile
 % vertex_sum(v) is the sum of the weights placed near v
 function var int: vertex_sum(VERTEX: v) =
   sum (f in FACE, r in 0..2 where vrtx[f, r] == v)
-      (weight[tile[f], [1,2,0,1,2][3 + r - rot[tile[f]]]]); % equiv (3+r-rot[tile[f]]) % 3
+      (weight[tile[f], [1,2,0,1,2][3 + r - rot[tile[f]]]]);
+      % equivalent to  (3+r-rot[tile[f]]) % 3
 
 constraint alldifferent(tile);
 constraint forall (v in VERTEX) (vertex_sum(v) == cap[v]);
@@ -42,14 +44,15 @@ constraint forall (t1 in 1..n, t2 in 1..n where t1 < t2 /\
                            where tile[f1] == t1 /\ tile[f2] == t2)
                           (f1 < f2));
 
-solve satisfy;
+% Plain search strategy (prioritize tile vs rot, mainly for Gecode)
+solve :: int_search(tile, first_fail, indomain_min) satisfy;
 
 % Random search strategy + constant restart
 %solve :: int_search(tile, first_fail, indomain_random)
 %      :: restart_constant(100)
 %      satisfy;
 
-% The instruction to the solution for IcoSoKu
+% The instructions to the solution for IcoSoKu
 function string: instruction(FACE: f) =
   let { 0..3: w0 = weight[fix(tile[f]), (3 - fix(rot[tile[f]])) mod 3],
         0..3: w1 = weight[fix(tile[f]), (4 - fix(rot[tile[f]])) mod 3],

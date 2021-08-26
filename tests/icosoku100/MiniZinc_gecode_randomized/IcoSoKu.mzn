@@ -7,15 +7,8 @@ array[FACE,0..2] of VERTEX: vrtx; % vertices involved in each face (clockwise)
 m = 12;
 n = 20;
 VERTEX = {A, B, C, D, E, F, G, H, I, J, K, L};
-FACE = {ABC, ACD, ADE, AEF, AFB,
-        BFK, BGC, BKG, CGH, CHD,
-        DHI, DIE, EIJ, EJF, FJK,
-        GKL, GLH, HLI, ILJ, JLK};
-vrtx = array2d(FACE, 0..2,
-  [A, B, C,  A, C, D,  A, D, E,  A, E, F,  A, F, B,
-   B, F, K,  B, G, C,  B, K, G,  C, G, H,  C, H, D,
-   D, H, I,  D, I, E,  E, I, J,  E, J, F,  F, J, K,
-   G, K, L,  G, L, H,  H, L, I,  I, L, J,  J, L, K]);
+FACE = {ABC, ACD, ADE, AEF, AFB, BFK, BGC, BKG, CGH, CHD, DHI, DIE, EIJ, EJF, FJK, GKL, GLH, HLI, ILJ, JLK};
+vrtx = array2d(FACE, 0..2, [A, B, C,  A, C, D,  A, D, E,  A, E, F,  A, F, B,  B, F, K,  B, G, C,  B, K, G,  C, G, H,  C, H, D,  D, H, I,  D, I, E,  E, I, J,  E, J, F,  F, J, K,  G, K, L,  G, L, H,  H, L, I,  I, L, J,  J, L, K]);
 
 array[VERTEX] of int: cap; % capacity of each vertex
 array[1..n, 0..2] of int: weight; % description of the tiles (clockwise)
@@ -39,7 +32,9 @@ constraint forall (t1 in 1..n, t2 in 1..n where t1 < t2 /\
                            where tile[f1] == t1 /\ tile[f2] == t2)
                           (f1 < f2));
 
-solve satisfy;
+solve :: int_search(tile, first_fail, indomain_random)
+      :: restart_constant(100)
+      satisfy;
 
 function string: instruction(FACE: f) =
   let { 0..3: w0 = weight[fix(tile[f]), (3 - fix(rot[tile[f]])) mod 3],

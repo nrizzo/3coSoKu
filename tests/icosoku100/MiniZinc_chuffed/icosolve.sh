@@ -7,7 +7,6 @@ output=$(echo "$instance" | cat IcoSoKu.mzn input-ico.dzn - | \
 		--input-from-stdin \
 		--fzn-flags "--rnd-seed 40" 2>&1)
 
-echo "$output"
 if echo "$output" | grep --quiet UNSATISFIABLE
 then
 	echo "UNSAT instance!" >&2

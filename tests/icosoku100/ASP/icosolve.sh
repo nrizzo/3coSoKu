@@ -8,5 +8,8 @@ then
 	echo "UNSAT instance!" >&2
 	exit 1
 else
-	echo "$output" | grep "CPU Time" | cut -d' ' -f8 | tr -d "s"
+	globaltime=$(echo "$output" | grep "Time" | grep "Solving" | tr -s " " "\t" | cut -f3 | tr -d "s")
+	solvetime=$(echo "$output" | grep "Time" | grep "Solving" | tr -s " " "\t" | cut -f5 | tr -d "s")
+	groundingtime=$(echo "$globaltime - $solvetime" | bc -l)
+	echo "$globaltime $groundingtime"
 fi

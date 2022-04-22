@@ -54,7 +54,7 @@ The use of a Unix pipe makes it possible to use the same stream of pseudo-random
 ![Test results for icosoku100.](../images/icosoku100.png)
 The test results highlight some interesting properties of IcoSoKu:
 - standard search strategies can explore a lot of incorrect solutions before arriving at a correct one, whereas the lazy clause generation of clingo for the ASP model is an effective solving tool;
-- a randomized search strategy with frequent restarts also solves IcoSoKu consistently, and this is because there are millions (!) of correct solutions to each instance.
+- a randomized search strategy with frequent restarts also solves IcoSoKu consistently, and this is because there are billions (!) of correct solutions to each instance.
 
 ## unsat-icosoku100
 We define the k-unsat-icosoku100 problem as follows: the game is defined just as IcoSoKu, but one of the 12 capacities is decremented by 1 and k tiles are placed on k icosahedron faces, without specifying their rotation. The script `unsat-icosoku100/runtest.sh` generates a batch of 100 random instances of 4-unsat-IcoSoKu and measures the performance of the following solvers on these instances:
